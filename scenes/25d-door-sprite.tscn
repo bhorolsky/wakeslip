@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dwrb2q2lk2xrm"]
+
+[ext_resource type="Script" uid="uid://dhlmt1q1k3ta1" path="res://scripts/25d-door-sprite.gd" id="1_5ot5i"]
+[ext_resource type="Texture2D" uid="uid://c8kun8378wsdb" path="res://assets/sprites/door-closed.png" id="2_sohv7"]
+[ext_resource type="Texture2D" uid="uid://dd27w6ksnpr73" path="res://assets/sprites/door-open.png" id="3_sohv7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ovmec"]
+size = Vector3(1.6, 3.2, 0.1)
+
+[node name="spritedoor" type="StaticBody3D" unique_id=2100070171]
+script = ExtResource("1_5ot5i")
+closed_texture = ExtResource("2_sohv7")
+open_texture = ExtResource("3_sohv7")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1179360192]
+pixel_size = 0.025
+texture_filter = 2
+texture = ExtResource("2_sohv7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=970670810]
+shape = SubResource("BoxShape3D_ovmec")
