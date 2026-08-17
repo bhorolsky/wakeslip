@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b5wr45isphp7e"]
+
+[ext_resource type="Script" uid="uid://drt724fqqkfh0" path="res://scripts/25d/inventory/inventory-slot.gd" id="1_65yqr"]
+[ext_resource type="Texture2D" uid="uid://b8ywlddhqsmpq" path="res://assets/sprites/ui/inventory/cellnothing.png" id="2_01wf0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gmbvb"]
+font_size = 10
+
+[node name="Panel" type="Panel" unique_id=1526774645 node_paths=PackedStringArray("texture_rect", "label")]
+custom_minimum_size = Vector2(50, 50)
+script = ExtResource("1_65yqr")
+texture_rect = NodePath("TextureRect")
+label = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=758549589]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_01wf0")
+
+[node name="Label" type="Label" parent="." unique_id=1670273646]
+custom_minimum_size = Vector2(40, 30)
+custom_maximum_size = Vector2(40, 30)
+layout_mode = 0
+offset_top = 50.0
+offset_right = 40.0
+offset_bottom = 80.0
+text = "item"
+label_settings = SubResource("LabelSettings_gmbvb")

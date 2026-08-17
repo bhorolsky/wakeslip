@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/25d/inventory/item-pickup.gd" id="1_ip"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ip"]
+size = Vector3(0.6, 0.6, 0.1)
+
+[node name="ItemPickup" type="StaticBody3D"]
+script = ExtResource("1_ip")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.01
+billboard = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ip")

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://deed78fltwfww"]
+
+[ext_resource type="Script" uid="uid://doombwx8lyrme" path="res://scripts/25d/inventory/held-item-view.gd" id="1_hiv"]
+
+[node name="HeldItemView" type="Sprite3D" unique_id=1048853802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.25, -0.6)
+no_depth_test = true
+script = ExtResource("1_hiv")

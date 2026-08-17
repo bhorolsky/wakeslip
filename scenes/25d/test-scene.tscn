@@ -1,15 +1,13 @@
 [gd_scene format=3 uid="uid://l2bijlkmsahy"]
 
-[ext_resource type="PackedScene" uid="uid://g818qa3sae64" path="res://scenes/25d-player.tscn" id="1_1kc1q"]
-[ext_resource type="PackedScene" uid="uid://dwrb2q2lk2xrm" path="res://scenes/25d-door-sprite.tscn" id="2_4msxo"]
-[ext_resource type="PackedScene" uid="uid://d4b234fok1upc" path="res://scenes/25d-ui.tscn" id="3_nt5v8"]
+[ext_resource type="PackedScene" uid="uid://g818qa3sae64" path="res://scenes/25d/player.tscn" id="1_1kc1q"]
+[ext_resource type="PackedScene" uid="uid://dwrb2q2lk2xrm" path="res://scenes/25d/door-sprite.tscn" id="2_4msxo"]
+[ext_resource type="PackedScene" uid="uid://d4b234fok1upc" path="res://scenes/25d/ui/ui.tscn" id="3_nt5v8"]
+[ext_resource type="PackedScene" path="res://scenes/25d/inventory/item-pickup.tscn" id="4_pickup"]
+[ext_resource type="Resource" path="res://resources/items/jump-test-item.tres" id="5_jumpitem"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmewi"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_dmp1u"]
-lightmap_size_hint = Vector2i(5004, 2516)
-material = SubResource("StandardMaterial3D_mmewi")
-size = Vector3(500, 1, 500)
+[sub_resource type="BoxMesh" id="BoxMesh_fwhf0"]
+size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dmp1u"]
 size = Vector3(500, 1, 500)
@@ -23,12 +21,16 @@ top_radius = 0.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
 size = Vector3(2, 2, 1)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oxfux"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gmbvb"]
+
 [node name="Node3D" type="Node3D" unique_id=710958185]
 
 [node name="testfloor" type="StaticBody3D" parent="." unique_id=169986517]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="testfloor" unique_id=2126532367]
-mesh = SubResource("BoxMesh_dmp1u")
+mesh = SubResource("BoxMesh_fwhf0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="testfloor" unique_id=806447644]
 shape = SubResource("BoxShape3D_dmp1u")
@@ -42,17 +44,17 @@ mesh = SubResource("CylinderMesh_o5qli")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1229895477]
 shape = SubResource("BoxShape3D_o5qli")
 
-[node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=1796291666]
+[node name="TestPickup" parent="." unique_id=1247877617 instance=ExtResource("4_pickup")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, 5)
+physics_material_override = SubResource("PhysicsMaterial_oxfux")
+item = ExtResource("5_jumpitem")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4" unique_id=541563468]
-mesh = SubResource("CylinderMesh_o5qli")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestPickup" unique_id=258742970]
+mesh = SubResource("BoxMesh_gmbvb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4" unique_id=1483138338]
-shape = SubResource("BoxShape3D_o5qli")
-
-[node name="testplayer" parent="." unique_id=2071825483 instance=ExtResource("1_1kc1q")]
+[node name="testplayer" parent="." unique_id=2071825483 node_paths=PackedStringArray("inventory_ui") instance=ExtResource("1_1kc1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+inventory_ui = NodePath("../25d-ui")
 
 [node name="testlight" type="DirectionalLight3D" parent="." unique_id=1920548455]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 10, 0)
@@ -66,4 +68,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -5)
 [node name="testspritedoor2" parent="." unique_id=852854428 instance=ExtResource("2_4msxo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -5)
 
-[node name="25d-ui" parent="." unique_id=1140342271 instance=ExtResource("3_nt5v8")]
+[node name="25d-ui" parent="." unique_id=1140342271 node_paths=PackedStringArray("player") instance=ExtResource("3_nt5v8")]
+player = NodePath("../testplayer")

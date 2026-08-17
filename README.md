@@ -7,29 +7,29 @@ __Our git hostings:__
 [Github (mirror)](https://github.com/bhorolsky/wakeslip)  
 
 # This repository includes:
-- Wakeslip scripts
-- Scenes
-- Wakeslip documentations
+- Wakeslip core scripts  
+- Wakeslip core documentation  
+- Wakeslip core scenes  
 
 # This repository excludes:
-- Sprites  
-- Sounds  
-- Assets
+- Wakeslip assets sprites  
+- Wakeslip assets music  
+- Wakeslip assets icons  
+
+To get wakeslip-assets follow next steps
 
 # Getting Started:
 __How to start:__  
-- Clone this core repo: `git clone https://codeberg.org/bhorolsky/wakeslip.git && cd wakeslip` or from [github.com](https://github.com/bhorolsky/wakeslip.git)  
-- placeholder 
+- Clone this core repo: `git clone --recursive https://codeberg.org/bhorolsky/wakeslip.git && cd wakeslip` or from [github.com](https://github.com/bhorolsky/wakeslip.git)  
+- 
 
 See more about wakeslip build [there](placeholder)  
 
 # READMEs:
 - [placeholder](placeholder)  
-placeholder  
 
 # Docs:
 - [placeholder](placeholder)  
-placeholder  
 
 # Q&A:
 - Q: "placeholder?"  

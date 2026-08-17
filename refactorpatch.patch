@@ -1,0 +1,713 @@
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/door-sprite.tscn /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/door-sprite.tscn
+--- /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/door-sprite.tscn	2026-08-15 20:50:25.544136829 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/door-sprite.tscn	2026-08-17 22:10:36.000000000 +0400
+@@ -1,6 +1,6 @@
+ [gd_scene format=3 uid="uid://dwrb2q2lk2xrm"]
+ 
+-[ext_resource type="Script" uid="uid://dhlmt1q1k3ta1" path="res://scripts/25d-door-sprite.gd" id="1_5ot5i"]
++[ext_resource type="Script" uid="uid://dhlmt1q1k3ta1" path="res://scripts/25d/door-sprite.gd" id="1_5ot5i"]
+ [ext_resource type="Texture2D" uid="uid://c8kun8378wsdb" path="res://assets/sprites/door-closed.png" id="2_sohv7"]
+ [ext_resource type="Texture2D" uid="uid://dd27w6ksnpr73" path="res://assets/sprites/door-open.png" id="3_sohv7"]
+ 
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/inventory/held-item-view.tscn /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/inventory/held-item-view.tscn
+--- /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/inventory/held-item-view.tscn	2026-08-16 01:59:42.374547005 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/inventory/held-item-view.tscn	1970-01-01 04:00:00.000000000 +0400
+@@ -1,8 +0,0 @@
+-[gd_scene format=3 uid="uid://deed78fltwfww"]
+-
+-[ext_resource type="Script" uid="uid://doombwx8lyrme" path="res://scripts/25d/inventory/held-item-view.gd" id="1_hiv"]
+-
+-[node name="HeldItemView" type="Sprite3D" unique_id=1048853802]
+-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.25, -0.6)
+-no_depth_test = true
+-script = ExtResource("1_hiv")
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/inventory/inventory-slot.tscn /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/inventory/inventory-slot.tscn
+--- /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/inventory/inventory-slot.tscn	2026-08-15 21:03:04.798948165 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/inventory/inventory-slot.tscn	2026-08-17 22:10:36.000000000 +0400
+@@ -2,30 +2,25 @@
+ 
+ [ext_resource type="Script" uid="uid://drt724fqqkfh0" path="res://scripts/25d/inventory/inventory-slot.gd" id="1_65yqr"]
+ [ext_resource type="Texture2D" uid="uid://b8ywlddhqsmpq" path="res://assets/sprites/ui/inventory/cellnothing.png" id="2_01wf0"]
++[ext_resource type="Texture2D" uid="uid://c8ovuuy3ygrax" path="res://assets/sprites/ui/inventory/cell.png" id="3_cell"]
+ 
+-[sub_resource type="LabelSettings" id="LabelSettings_gmbvb"]
+-font_size = 10
+-
+-[node name="Panel" type="Panel" unique_id=1526774645 node_paths=PackedStringArray("texture_rect", "label")]
++[node name="InventorySlot" type="TextureRect" unique_id=1526774645 node_paths=PackedStringArray("item_texture")]
+ custom_minimum_size = Vector2(50, 50)
++texture = ExtResource("3_cell")
++expand_mode = 1
++stretch_mode = 5
++mouse_filter = 2
+ script = ExtResource("1_65yqr")
+-texture_rect = NodePath("TextureRect")
+-label = NodePath("Label")
++item_texture = NodePath("ItemTexture")
++empty_texture = ExtResource("2_01wf0")
+ 
+-[node name="TextureRect" type="TextureRect" parent="." unique_id=758549589]
+-custom_minimum_size = Vector2(50, 50)
+-custom_maximum_size = Vector2(50, 50)
++[node name="ItemTexture" type="TextureRect" parent="." unique_id=758549589]
+ layout_mode = 0
+-offset_right = 40.0
+-offset_bottom = 40.0
++offset_left = 5.0
++offset_top = 5.0
++offset_right = 45.0
++offset_bottom = 45.0
+ texture = ExtResource("2_01wf0")
+-
+-[node name="Label" type="Label" parent="." unique_id=1670273646]
+-custom_minimum_size = Vector2(40, 30)
+-custom_maximum_size = Vector2(40, 30)
+-layout_mode = 0
+-offset_top = 50.0
+-offset_right = 40.0
+-offset_bottom = 80.0
+-text = "item"
+-label_settings = SubResource("LabelSettings_gmbvb")
++expand_mode = 1
++stretch_mode = 5
++mouse_filter = 2
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/player.tscn /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/player.tscn
+--- /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/player.tscn	2026-08-16 01:59:44.043296819 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/player.tscn	2026-08-17 22:10:36.000000000 +0400
+@@ -1,7 +1,6 @@
+ [gd_scene format=3 uid="uid://g818qa3sae64"]
+ 
+ [ext_resource type="Script" uid="uid://bods30vc5qt7a" path="res://scripts/25d/player.gd" id="1_4cqw2"]
+-[ext_resource type="PackedScene" uid="uid://deed78fltwfww" path="res://scenes/25d/inventory/held-item-view.tscn" id="2_jhk3n"]
+ 
+ [sub_resource type="CapsuleMesh" id="CapsuleMesh_v6fml"]
+ 
+@@ -20,7 +19,9 @@
+ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+ fov = 90.0
+ 
+-[node name="HeldItemView" parent="Camera3D" unique_id=1376064075 instance=ExtResource("2_jhk3n")]
++[node name="HeldItemView" type="Sprite3D" parent="Camera3D" unique_id=1376064075]
++transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.25, -0.6)
++no_depth_test = true
+ 
+ [node name="InteractRayCast3D" type="RayCast3D" parent="." unique_id=256071318]
+ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/test-scene.tscn /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/test-scene.tscn
+--- /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/test-scene.tscn	2026-08-16 17:08:11.401038123 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/test-scene.tscn	2026-08-17 22:10:36.000000000 +0400
+@@ -68,5 +68,4 @@
+ [node name="testspritedoor2" parent="." unique_id=852854428 instance=ExtResource("2_4msxo")]
+ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -5)
+ 
+-[node name="25d-ui" parent="." unique_id=1140342271 node_paths=PackedStringArray("player") instance=ExtResource("3_nt5v8")]
+-player = NodePath("../testplayer")
++[node name="25d-ui" parent="." unique_id=1140342271 instance=ExtResource("3_nt5v8")]
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/ui/ui.tscn /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/ui/ui.tscn
+--- /home/bhorolsky/prj/prg/my/wakeslip/scenes/25d/ui/ui.tscn	2026-08-15 21:02:23.714538363 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scenes/25d/ui/ui.tscn	2026-08-17 22:10:36.000000000 +0400
+@@ -30,7 +30,3 @@
+ [node name="GridContainer" type="GridContainer" parent="." unique_id=452530797]
+ offset_right = 40.0
+ offset_bottom = 40.0
+-columns = 6
+-
+-[node name="Panel" parent="GridContainer" unique_id=1526774645 instance=ExtResource("4_45sr5")]
+-layout_mode = 2
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/door-sprite.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/door-sprite.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/door-sprite.gd	2026-08-15 20:49:33.903137583 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/door-sprite.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,3 +1,4 @@
++# Controls the door sprite, collision state, and automatic open/close timing.
+ class_name DoorSprite
+ extends StaticBody3D
+ ## Simple two-state (open/closed) sliding-texture door.
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/held-item-view.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/held-item-view.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/held-item-view.gd	2026-08-16 01:59:42.391779324 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/held-item-view.gd	1970-01-01 04:00:00.000000000 +0400
+@@ -1,15 +0,0 @@
+-class_name HeldItemView
+-extends Sprite3D
+-## Displays the currently selected inventory item as a fixed sprite
+-## anchored to the camera (classic FPS "viewmodel" style).
+-## Pure display — knows nothing about what an item does when used.
+-
+-func show_item(item: Item) -> void:
+-	if item == null or item.held_texture == null:
+-		clear()
+-		return
+-	texture = item.held_texture
+-	visible = true
+-
+-func clear() -> void:
+-	visible = false
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/held-item-view.gd.uid /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/held-item-view.gd.uid
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/held-item-view.gd.uid	2026-08-16 01:57:06.262421785 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/held-item-view.gd.uid	1970-01-01 04:00:00.000000000 +0400
+@@ -1 +0,0 @@
+-uid://doombwx8lyrme
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory.gd	2026-08-15 21:49:57.588746530 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,82 +1,84 @@
++# Owns the player's item slots and selection without depending on UI or scene-tree nodes.
+ class_name Inventory
+-extends Node
+-## Owns and mutates the player's item slots. Pure game-state logic —
+-## has zero knowledge of UI, scene tree layout, or input.
++extends RefCounted
+ 
+ signal inventory_changed
+ signal selected_slot_changed(new_index: int)
+ 
+-@export var max_slots: int = 6
++var slots: Array[Item] = []
++var selected_slot := 0
++
++
++func _init(slot_count: int = 6) -> void:
++	slots.resize(maxi(slot_count, 1))
++
++
++func add_item(item: Item) -> bool:
++	if item == null:
++		return false
++
++	for index in slots.size():
++		if slots[index] != null:
++			continue
++
++		slots[index] = item
++		inventory_changed.emit()
++		return true
++
++	return false
++
++
++func remove_item(slot_index: int) -> bool:
++	if not _is_valid_index(slot_index):
++		return false
++
++	if slots[slot_index] == null:
++		return false
++
++	slots[slot_index] = null
++	inventory_changed.emit()
++	return true
+ 
+-var slots: Array[InventorySlotData] = []
+-var selected_slot: int = 0 
+ 
+-## Selects an arbitrary slot by index.
+ func select_slot(index: int) -> void:
+ 	if not _is_valid_index(index) or index == selected_slot:
+ 		return
++
+ 	selected_slot = index
+ 	selected_slot_changed.emit(selected_slot)
+ 
+-## Moves selection forward, wrapping around.
++
+ func select_next_slot() -> void:
+ 	if slots.is_empty():
+ 		return
++
+ 	select_slot((selected_slot + 1) % slots.size())
+ 
+-## Moves selection backward, wrapping around.
++
+ func select_previous_slot() -> void:
+ 	if slots.is_empty():
+ 		return
++
+ 	select_slot((selected_slot - 1 + slots.size()) % slots.size())
+ 
+-func _ready() -> void:
+-	slots.resize(max_slots)
+ 
+-## or filling the first empty slot. Returns false if inventory is full.
+-func add_item(item: Item) -> bool:
+-	if _place_in_empty_slot(item):
+-		return true
+-	return false
++func use_selected(actor: Node) -> bool:
++	if actor == null or not _is_valid_index(selected_slot):
++		return false
+ 
+-func _place_in_empty_slot(item: Item) -> bool:
+-	for i in range(slots.size()):
+-		if slots[i] != null:
+-			continue
++	var item := slots[selected_slot]
+ 
+-		var slot_data := InventorySlotData.new()
+-		slot_data.item = item
+-		slots[i] = slot_data
+-		inventory_changed.emit()
+-		return true
+-	return false
++	if item == null:
++		return false
+ 
+-## Removes one unit from the given slot, clearing the slot if it hits zero.
+-func remove_item(slot_index: int) -> void:
+-	if not _is_valid_index(slot_index):
+-		return
+-	if slots[slot_index] == null:
+-		return
+-	slots[slot_index] = null
+-	inventory_changed.emit()
++	var consumed := item.use(actor)
+ 
+-## Triggers the item's use() effect on `actor`, then removes one unit on success.
+-func use_item(slot_index: int, actor: Node) -> bool:
+-	if not _is_valid_index(slot_index):
+-		return false
+-	var slot_data := slots[slot_index]
+-	if slot_data == null or slot_data.item == null:
+-		return false
++	if consumed:
++		slots[selected_slot] = null
++		inventory_changed.emit()
+ 
+-	var was_used := slot_data.item.use(actor)
+-	if was_used:
+-		remove_item(slot_index)
+-	return was_used
++	return true
+ 
+-func get_slot_data(slot_index: int) -> InventorySlotData:
+-	if not _is_valid_index(slot_index):
+-		return null
+-	return slots[slot_index]
+ 
+-func _is_valid_index(slot_index: int) -> bool:
+-	return slot_index >= 0 and slot_index < slots.size()
+\ No newline at end of file
++func _is_valid_index(index: int) -> bool:
++	return index >= 0 and index < slots.size()
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory-slot-data.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory-slot-data.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory-slot-data.gd	2026-08-15 21:47:16.285162754 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory-slot-data.gd	1970-01-01 04:00:00.000000000 +0400
+@@ -1,5 +0,0 @@
+-class_name InventorySlotData
+-extends Resource
+-## Plain data container for a single occupied inventory slot
+-
+-@export var item: Item
+\ No newline at end of file
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory-slot-data.gd.uid /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory-slot-data.gd.uid
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory-slot-data.gd.uid	2026-08-15 19:16:00.481716921 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory-slot-data.gd.uid	1970-01-01 04:00:00.000000000 +0400
+@@ -1 +0,0 @@
+-uid://duyfgdt4neeah
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory-slot.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory-slot.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/inventory-slot.gd	2026-08-15 21:50:55.224131507 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/inventory-slot.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,53 +1,24 @@
++# Displays one inventory slot using the project's cell texture and an item icon.
+ class_name InventorySlotUI
+-extends Panel
+-## Single inventory cell. Purely visual + input — reports clicks via
+-## signals instead of deciding what "use" or "drop" means itself.
+-
+-signal use_requested(slot_index: int)
+-signal drop_requested(slot_index: int)
+-
+-const EMPTY_LABEL := ""
+-
+-@export var texture_rect: TextureRect
+-@export var label: Label
+-
+-var _slot_index: int = -1
+-var _inventory: Inventory
+-var _is_selected: bool = false
+-
+-func _ready() -> void:
+-	gui_input.connect(_on_gui_input)
+-
+-## Binds this widget to one inventory slot and refreshes its visuals.
+-func setup(slot_index: int, inventory: Inventory) -> void:
+-	_slot_index = slot_index
+-	_inventory = inventory
+-	_refresh_display()
+-
+-func _refresh_display() -> void:
+-	var slot_data := _inventory.get_slot_data(_slot_index)
+-	if slot_data == null or slot_data.item == null:
+-		_clear_display()
+-		return
+-
+-	texture_rect.texture = slot_data.item.texture
+-
+-func _clear_display() -> void:
+-	texture_rect.texture = null
+-	label.text = EMPTY_LABEL
+-	label.visible = false
+-
+-func _on_gui_input(event: InputEvent) -> void:
+-	if not (event is InputEventMouseButton and event.pressed):
+-		return
+-
+-	match event.button_index:
+-		MOUSE_BUTTON_LEFT:
+-			use_requested.emit(_slot_index)
+-		MOUSE_BUTTON_RIGHT:
+-			drop_requested.emit(_slot_index)
+-
+-## Toggles the visual "selected" state of this slot (e.g. hotbar highlight).
+-func set_selected(is_selected: bool) -> void:
+-	_is_selected = is_selected
+-	modulate = Color(1.3, 1.3, 0.7) if _is_selected else Color(1, 1, 1)
++extends TextureRect
++
++@export var item_texture: TextureRect
++@export var empty_texture: Texture2D
++
++var _selected := false
++
++
++func set_item(item: Item) -> void:
++	if item == null:
++		item_texture.texture = empty_texture
++	else:
++		item_texture.texture = item.texture
++
++
++func set_selected(selected: bool) -> void:
++	_selected = selected
++
++	if _selected:
++		modulate = Color(1.3, 1.3, 0.7)
++	else:
++		modulate = Color.WHITE
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/item.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/item.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/item.gd	2026-08-16 01:51:55.074176275 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/item.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,3 +1,4 @@
++# Defines item data and the default behavior shared by usable inventory items.
+ class_name Item
+ extends Resource
+ ## Base resource describing a collectible / usable inventory item
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/item-pickup.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/item-pickup.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/item-pickup.gd	2026-08-16 16:57:23.474884507 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/item-pickup.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,3 +1,4 @@
++# Represents a world item that can be picked up through player interaction.
+ class_name ItemPickup
+ extends StaticBody3D
+ ## World object that grants `item` to whichever actor interacts with it.
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/items/jump-item.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/items/jump-item.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/inventory/items/jump-item.gd	2026-08-16 01:52:59.347325877 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/inventory/items/jump-item.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,3 +1,4 @@
++# Defines the jump item behavior used by the project's inventory test item.
+ class_name JumpItem
+ extends Item
+ ## Test item: makes the actor jump when used.
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/player.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/player.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/player.gd	2026-08-16 02:02:20.422648204 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/player.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,89 +1,49 @@
++# Handles player movement, interaction, inventory ownership, and item use.
+ class_name Player
+ extends CharacterBody3D
+-## First-person 2.5D controller: movement, look, interaction raycasting,
+-## and wiring the player's Inventory to the HUD.
+ 
+ @export_group("Movement")
+ @export var walk_speed := 5.0
+ @export var sprint_speed := 7.0
+ @export var jump_velocity := 5.0
+ @export var gravity := 15.0
++@export var inventory_slot_count := 6
+ 
+ @export_group("Camera")
+ @export var mouse_sensitivity := 0.005
+ 
+ @export_group("References")
+-@export var inventory: Inventory
+-@export var inventory_ui: Node  ## Expects: inventory (settable), update_inventory(), toggle_inventory(), set_cursor_default(), set_cursor_interact()
+-@export var held_item_view: Node  ## Expects: show_item(item: Item), clear()
++@export var inventory_ui: PlayerHud
+ 
+ @onready var interact_ray: RayCast3D = $InteractRayCast3D
++@onready var held_item_view: Sprite3D = $Camera3D/HeldItemView
++
++var inventory: Inventory
++
+ 
+ func _ready() -> void:
+ 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+-	_ensure_inventory_exists()
+-	_link_inventory_to_hud()
+-	_link_inventory_to_held_view()
+ 
+-func _ensure_inventory_exists() -> void:
+-	if inventory != null:
+-		return
+-	inventory = Inventory.new()
+-	add_child(inventory)
++	inventory = Inventory.new(inventory_slot_count)
++	inventory.inventory_changed.connect(_on_inventory_changed)
++	inventory.selected_slot_changed.connect(_on_selected_slot_changed)
+ 
+-## Gives the HUD a live reference to this player's inventory and
+-## subscribes it to future changes. This fixes the previous bug where
+-## the HUD's `inventory` field was declared but never assigned.
+-func _link_inventory_to_hud() -> void:
+-	if inventory_ui == null:
+-		return
+-	inventory_ui.inventory = inventory
+-	inventory.inventory_changed.connect(inventory_ui.update_inventory)
+-	inventory.selected_slot_changed.connect(inventory_ui._on_selected_slot_changed) 
+-	inventory_ui.update_inventory()
++	inventory_ui.set_inventory(inventory)
++	_update_held_item()
+ 
+-## Wires the "in-hand" sprite to inventory state so it updates on
+-## selection change and on pickup/use/drop.
+-func _link_inventory_to_held_view() -> void:
+-	if held_item_view == null:
+-		return
+-	inventory.inventory_changed.connect(_update_held_item_view)
+-	inventory.selected_slot_changed.connect(func(_i): _update_held_item_view())
+-	_update_held_item_view()
+-
+-func _update_held_item_view() -> void:
+-	var slot_data := inventory.get_slot_data(inventory.selected_slot)
+-	if slot_data != null and slot_data.item != null:
+-		held_item_view.show_item(slot_data.item)
+-	else:
+-		held_item_view.clear()
+-
+-func pick_up_item(item: Item) -> bool:
+-	return inventory.add_item(item)
+ 
+ func _unhandled_input(event: InputEvent) -> void:
+ 	if event is InputEventMouseMotion:
+ 		rotate_y(-event.relative.x * mouse_sensitivity)
+ 		return
+ 
+-	if event is InputEventKey and event.pressed and event.keycode == KEY_I:
+-		_toggle_inventory_ui()
+-		return
+-
+-	_handle_slot_selection_input()
+-
+-func _handle_slot_selection_input() -> void:
+-	if inventory == null:
+-		return
+ 	if Input.is_action_just_pressed("select_next_slot"):
+ 		inventory.select_next_slot()
+ 	elif Input.is_action_just_pressed("select_previous_slot"):
+ 		inventory.select_previous_slot()
++	elif Input.is_action_just_pressed("use"):
++		inventory.use_selected(self)
+ 
+-func _toggle_inventory_ui() -> void:
+-	if inventory_ui == null:
+-		return
+-	inventory_ui.toggle_inventory()
+ 
+ func _physics_process(delta: float) -> void:
+ 	_apply_gravity(delta)
+@@ -91,54 +51,102 @@
+ 	_apply_movement()
+ 	_handle_interaction_input()
+ 	_update_crosshair()
++
+ 	move_and_slide()
+ 
++
+ func _apply_gravity(delta: float) -> void:
+ 	if is_on_floor():
+ 		velocity.y = 0.0
+ 	else:
+ 		velocity.y -= gravity * delta
+ 
+-## TODO: delete this
+-func jump() -> void:
+-	if is_on_floor():
+-		velocity.y = jump_velocity
++
++func jump() -> bool:
++	if not is_on_floor():
++		return false
++
++	velocity.y = jump_velocity
++	return true
++
+ 
+ func _apply_jump() -> void:
+-	if Input.is_action_just_pressed("jump") and is_on_floor():
+-		velocity.y = jump_velocity
++	if Input.is_action_just_pressed("jump"):
++		jump()
++
+ 
+ func _apply_movement() -> void:
+-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
++	var input_dir := Input.get_vector(
++		"move_left",
++		"move_right",
++		"move_forward",
++		"move_backward"
++	)
++
+ 	var direction := transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
+ 	direction.y = 0.0
+-	direction = direction.normalized()
++
++	if direction.length_squared() > 0.0:
++		direction = direction.normalized()
+ 
+ 	var current_speed := sprint_speed if Input.is_action_pressed("sprint") else walk_speed
+ 	velocity.x = direction.x * current_speed
+ 	velocity.z = direction.z * current_speed
+ 
++
+ func _handle_interaction_input() -> void:
+ 	if Input.is_action_just_pressed("interact"):
+ 		_interact_with_target()
+ 
+-## Returns whatever the interact raycast is currently hitting, or null.
++
+ func _get_interact_target() -> Node:
+ 	if not interact_ray.is_colliding():
+ 		return null
++
+ 	return interact_ray.get_collider()
+ 
++
+ func _update_crosshair() -> void:
+ 	if inventory_ui == null:
+ 		return
++
+ 	var target := _get_interact_target()
++
+ 	if target != null and target.has_method("interact"):
+ 		inventory_ui.set_cursor_interact()
+ 	else:
+ 		inventory_ui.set_cursor_default()
+ 
++
+ func _interact_with_target() -> void:
+ 	var target := _get_interact_target()
++
+ 	if target == null or not target.has_method("interact"):
+ 		return
+-	target.interact(self)
+\ No newline at end of file
++
++	target.interact(self)
++
++
++func pick_up_item(item: Item) -> bool:
++	return inventory.add_item(item)
++
++
++func _on_inventory_changed() -> void:
++	inventory_ui.update_inventory()
++	_update_held_item()
++
++
++func _on_selected_slot_changed(new_index: int) -> void:
++	inventory_ui.update_selection(new_index)
++	_update_held_item()
++
++
++func _update_held_item() -> void:
++	var item := inventory.slots[inventory.selected_slot]
++
++	if item == null or item.held_texture == null:
++		held_item_view.visible = false
++		return
++
++	held_item_view.texture = item.held_texture
++	held_item_view.visible = true
+diff '--color=auto' -urN -x .git -x .godot -x build /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/ui/ui.gd /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/ui/ui.gd
+--- /home/bhorolsky/prj/prg/my/wakeslip/scripts/25d/ui/ui.gd	2026-08-15 21:16:12.082015834 +0400
++++ /home/bhorolsky/dl/wakeslip-refactored/scripts/25d/ui/ui.gd	2026-08-17 22:10:36.000000000 +0400
+@@ -1,60 +1,49 @@
++# Displays the crosshair and inventory state without owning gameplay or inventory logic.
+ class_name PlayerHud
+ extends CanvasLayer
+-## HUD: crosshair state + rebuilding the inventory grid from Inventory data.
+-## Talks to gameplay nodes only through @export references and signals —
+-## never reaches into the scene tree by node name.
+ 
+ @export var cursor_default: Texture2D
+ @export var cursor_interact: Texture2D
+ @export var slot_scene: PackedScene
+ @export var grid_container: GridContainer
+-@export var player: Node  ## Passed to Inventory.use_item() as the acting node.
++@export var columns_per_row := 6
+ 
+ @onready var crosshair: TextureRect = $crosshair
+ 
+-var inventory: Inventory  ## Assigned by Player._link_inventory_to_hud().
++var inventory: Inventory
++
++
++func set_inventory(value: Inventory) -> void:
++	inventory = value
++	grid_container.columns = maxi(columns_per_row, 1)
++	update_inventory()
++
+ 
+ func set_cursor_default() -> void:
+ 	crosshair.texture = cursor_default
+ 
++
+ func set_cursor_interact() -> void:
+ 	crosshair.texture = cursor_interact
+ 
+-## Rebuilds all slot widgets from the current inventory state.
++
+ func update_inventory() -> void:
+ 	if inventory == null:
+ 		return
+-	_clear_slots()
+-	_build_slots()
+ 
+-func _clear_slots() -> void:
+ 	for child in grid_container.get_children():
+ 		child.queue_free()
+ 
+-func _build_slots() -> void:
+-	for i in range(inventory.slots.size()):
++	for index in inventory.slots.size():
+ 		var slot := slot_scene.instantiate()
+ 		grid_container.add_child(slot)
+-		slot.setup(i, inventory)
+-		slot.set_selected(i == inventory.selected_slot)
+-		slot.use_requested.connect(_on_slot_use_requested)
+-		slot.drop_requested.connect(_on_slot_drop_requested)
++		slot.set_item(inventory.slots[index])
++		slot.set_selected(index == inventory.selected_slot)
+ 
+-func _on_selected_slot_changed(new_index: int) -> void:
+-	for child in grid_container.get_children():
+-		if child.has_method("set_selected"):
+-			child.set_selected(child.get_index() == new_index)
+ 
+-func _on_slot_use_requested(slot_index: int) -> void:
+-	if inventory != null and player != null:
+-		inventory.use_item(slot_index, player)
+-
+-func _on_slot_drop_requested(slot_index: int) -> void:
+-	if inventory != null:
+-		inventory.remove_item(slot_index)
+-
+-func toggle_inventory() -> void:
+-	visible = not visible
+-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if visible else Input.MOUSE_MODE_CAPTURED
+-	if visible:
+-		update_inventory()
++func update_selection(selected_index: int) -> void:
++	for index in grid_container.get_child_count():
++		var slot := grid_container.get_child(index)
++
++		if slot.has_method("set_selected"):
++			slot.set_selected(index == selected_index)
